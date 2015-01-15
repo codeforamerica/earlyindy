@@ -156,6 +156,20 @@
                         return obj.MinAge <= 94672800 && obj.MaxAge > 378691200;
                     }
                 }
+            } else if (filter[0] === "Financial Assistance Options") {
+                condition = function(obj) {
+                    if (filter[1] === "CCDF vouchers") {
+                        return _.intersection(["Approved for CCDF Vouchers", "Approved for CCDF VouchersNULL"], obj.FeeAssistance.split(',')).length > 0;
+                    } else if (filter[1] === "Discount for more than one child") {
+                        return _.intersection(["Multi Child Discount", " Multi Child Discount"], obj.FeeAssistance.split(',')).length > 0;
+                    } else if (filter[1] === "Sliding fee scale") {
+                        return _.intersection([" Sliding Fee Scale", "Sliding Fee Scale"], obj.FeeAssistance.split(',')).length > 0;
+                    } else if (filter[1] === "Scholarships") {
+                        return _.intersection([" Scholarships", "Scholarships"], obj.FeeAssistance.split(',')).length > 0;
+                    } else if (filter[1] === "Employer/college supported discounts") {
+                        return _.intersection([" Employer/College Supported Discount",], obj.FeeAssistance.split(',')).length > 0;
+                    }
+                }
             } else {
                 condition = function(obj) {
                     return obj[filter[0]] === filter[1]
