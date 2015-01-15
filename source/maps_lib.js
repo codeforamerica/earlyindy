@@ -14,15 +14,9 @@ var MapsLib = MapsLib || {};
 var MapsLib = {
 
   //Setup section - put your Fusion Table details here
-  //Using the v1 Fusion Tables API. See https://developers.google.com/fusiontables/docs/v1/migration_guide for more info
 
-  //the encrypted Table ID of your Fusion Table (found under File => About)
-  //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1D7Lta4QnerWlTClAiWoQsaWZksDcycqc0Up0QPI",
-
-  //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
-  googleApiKey:       "AIzaSyBiSQxYlSAn8B4fBNANuiOUDmf0Mv72MAY",
+  googleApiKey:       "AIzaSyBFdQ6joqsX-D5i2YibagGYjB5ZniVPuxY",
 
   //name of the location column in your Fusion Table.
   //NOTE: if your location column name has spaces in it, surround it with single quotes
