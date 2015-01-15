@@ -22,14 +22,24 @@ $(function() {
   fetchJSON('schools.json', function(err, data) {
     if (err) return alert(JSON.stringify(err))
     data.map(function(item) { 
-      item.markerURL = "images/red-dot.png"
-      if (item.Type === 'OUSD') {
-        item.markerURL = "images/red-dot.png"
-      } else if (item.Type === 'Alternate') {
-        item.markerURL = "images/green-dot.png"
-      } else {
-        item.markerURL = "images/yellow-dot.png"
+      item.markerURL = "images/new_purple_mark.png"
+
+      if(item.PTQLevel === 'Paths to QUALITY Level 4 - Highest Level'){
+        item.markerURL = "images/new_blue_mark.png"
+      } else if(item.PTQLevel === 'Paths to QUALITY Level 3') {
+        item.markerURL = "images/new_teal_mark.png"
+      } else if(item.PTQLevel === 'Paths to QUALITY Level 2') {
+        item.markerURL = "images/new_green_mark.png"
+      } else if(item.PTQLevel === 'Paths to QUALITY Level 1 - Entry Level') {
+        item.markerURL = "images/new_gold_mark.png"
+      } else if(_.contains(["Licensed, Class I", "Licensed, Class II",  "Licensed"], item.RegulatoryType)){
+        item.markerURL = "images/new_orange_mark.png"
+      } else if(_.contains(["Not Licensed, Registered", "Not Licensed, Registered, Meets Voluntary Certification Program Standards"], item.RegulatoryType)){
+        item.markerURL = "images/new_red_mark.png"
+      } else if(item.RegulatoryType === 'Not Licensed or Registered, Ask Program for Details'){
+        item.markerURL = "images/new_purple_mark.png"
       }
+     
     })
     allData = data
     //create results count

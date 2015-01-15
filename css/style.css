@@ -120,11 +120,13 @@ a { color: #4B58A6; }
           background-clip: padding-box; 
 }
 
-.filter-yellow { background-color: #FBF358; }
-.filter-green { background-color: #00E13C; }
-.filter-blue { background-color: #5781FC; }
-.filter-purple { background-color: #7C54FB; }
-.filter-red { background-color: #FB6353; }
+.filter-blue { background-color: #0000CD; }
+.filter-teal { background-color: #008080; }
+.filter-green { background-color: #32CD32; }
+.filter-gold { background-color: #FFD700; }
+.filter-orange { background-color: #FF8C00; }
+.filter-red { background-color: #FF0000; }
+.filter-purple { background-color: #800080; }
 
 canvas {-ms-touch-action: double-tap-zoom;}
 
