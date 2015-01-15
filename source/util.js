@@ -144,6 +144,18 @@
                         return obj.RegulatoryType === 'Not Licensed or Registered, Ask Program for Details';
                     }
                 }
+            } else if (filter[0] === "Age") {
+                condition = function(obj) {
+                    if (filter[1] === "Under 3 Years") {
+                        return obj.MinAge < 94672800;
+                    } else if (filter[1] === "3-5 Years") {
+                        return obj.MinAge <= 94672800 && obj.MaxAge >= 157788000;
+                    } else if (filter[1] === "3-8 Years") {
+                        return obj.MinAge <= 94672800 && obj.MaxAge > 252460800;
+                    } else if (filter[1] === "3-12 Years") {
+                        return obj.MinAge <= 94672800 && obj.MaxAge > 378691200;
+                    }
+                }
             } else {
                 condition = function(obj) {
                     return obj[filter[0]] === filter[1]
