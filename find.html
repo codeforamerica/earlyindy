@@ -17,7 +17,7 @@
 <body>
   <div class="navbar-wrapper">
       <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-        <div class="container">
+        <!-- <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -31,20 +31,18 @@
             <ul class="nav navbar-nav">
               <li><a href="http://www.earlyoakland.org">Home</a></li>
               <li class="active"><a href="find.html">Find Services</a></li>
-<!--                <li><a href="#funders">Funders</a></li>
-              <li><a href="#partners">Partners</a></li> -->
               <li><a href="#" data-toggle="modal" data-target="#suggestions">Enrolling Steps</a></li>
               <li><a href="#" data-toggle="modal" data-target="#faq">FAQ</a></li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
   </div>
   <div class='container-fluid'>
     <div class='row-fluid'>
       
       <div class='col-xs-12 col-sm-3'>
-        <p align="center">
+     <!--    <p align="center">
           <img src='images/eologo.png' width="150px"></p>
         <p>
           EarlyOakland is a campaign by the Oakland Education Cabinet to help Oaklanders find affordable early care and education services. You can use the map of to find subsidized programs for eligible families and children including HeadStart and Child Development Centers. Stay tuned for more resources!
@@ -60,7 +58,16 @@
             .
           </p>
           
-        </p>
+        </p> -->
+
+          <div class='well'>
+          <h4>
+            Enter an address or an intersection (<a id='find_me' href='#'>find me</a>)
+          </h4>
+          <input class='input-block-level' id='search_address' placeholder='' type='text' />
+          <input class='btn btn-primary' id='search' type='button' value='Search' />
+        </div>
+
       </div>
       
       <div class='col-xs-12 col-sm-9 col-md-6' id="mapContainer">
@@ -68,14 +75,7 @@
       </div>
       
       <div class='col-xs-12 col-sm-9 col-md-3'>
-        <div class='well'>
-          <h4>
-            Address (<a id='find_me' href='#'>find me</a>)
-          </h4>
-          <input class='input-block-level' id='search_address' placeholder='Enter an address or an intersection' type='text' />
-          <input class='btn btn-primary' id='search' type='button' value='Search' />
-        </div>
-
+      
         <div class='well'>
           <!-- Once you decide what filter you want, place the HTML code here. The section in the maps_lib.js is also marked. Once you're done, feel free to delete this explanatory section. -->
 
