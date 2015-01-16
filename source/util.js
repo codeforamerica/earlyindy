@@ -111,13 +111,17 @@
     };
 
     exports.filter = function(objects, conditions) {
-        var results = []
-        conditions.map(function(condition) {
-            objects.map(function(obj) {
-                if (condition(obj)) results.push(obj)
-            })
+      //Make sure each object passes at least one filter in each type
+      var typesOfConditions = _.values(_.groupBy(conditions, 'type'));
+
+      return _.filter(objects, function(object){
+        return _.all(typesOfConditions, function(conditions){
+          return _.any(conditions, function(condition){
+            return condition.filter(object);
+          })
         })
-        return _.uniq(results)
+      });
+
     }
 
     exports.getAllChecked = function() {
@@ -135,18 +139,58 @@
         filters.forEach(function(filter) {
             var condition;
             if (filter[0] === "RegulatoryType") {
-                condition = function(obj) {
-                    if (filter[1] === "Licensed") {
-                        return _.contains(["Licensed, Class I", "Licensed, Class II", "Licensed"], obj.RegulatoryType);
-                    } else if (filter[1] === "Registered") {
-                        return _.contains(["Not Licensed, Registered", "Not Licensed, Registered, Meets Voluntary Certification Program Standards"], obj.RegulatoryType);
-                    } else {
-                        return obj.RegulatoryType === 'Not Licensed or Registered, Ask Program for Details';
+                condition = {
+                    type: "RegulatoryType",
+                    filter: function(obj) {
+                        if (filter[1] === "Licensed") {
+                            return _.contains(["Licensed, Class I", "Licensed, Class II", "Licensed"], obj.RegulatoryType);
+                        } else if (filter[1] === "Registered") {
+                            return _.contains(["Not Licensed, Registered", "Not Licensed, Registered, Meets Voluntary Certification Program Standards"], obj.RegulatoryType);
+                        } else {
+                            return obj.RegulatoryType === 'Not Licensed or Registered, Ask Program for Details';
+                        }
+                    }
+                }
+
+
+            } else if (filter[0] === "Age") {
+                condition = {
+                    type: "Age",
+                    filter: function(obj) {
+                        if (filter[1] === "Under 3 Years") {
+                            return obj.MinAge < 94672800;
+                        } else if (filter[1] === "3-5 Years") {
+                            return obj.MinAge <= 94672800 && obj.MaxAge >= 157788000;
+                        } else if (filter[1] === "3-8 Years") {
+                            return obj.MinAge <= 94672800 && obj.MaxAge > 252460800;
+                        } else if (filter[1] === "3-12 Years") {
+                            return obj.MinAge <= 94672800 && obj.MaxAge > 378691200;
+                        }
+                    }
+                }
+            } else if (filter[0] === "Financial Assistance Options") {
+                condition = {
+                    type: "Financial Assistance Options",
+                    filter: function(obj) {
+                        if (filter[1] === "CCDF vouchers") {
+                            return _.intersection(["Approved for CCDF Vouchers", "Approved for CCDF VouchersNULL"], obj.FeeAssistance.split(',')).length > 0;
+                        } else if (filter[1] === "Discount for more than one child") {
+                            return _.intersection(["Multi Child Discount", " Multi Child Discount"], obj.FeeAssistance.split(',')).length > 0;
+                        } else if (filter[1] === "Sliding fee scale") {
+                            return _.intersection([" Sliding Fee Scale", "Sliding Fee Scale"], obj.FeeAssistance.split(',')).length > 0;
+                        } else if (filter[1] === "Scholarships") {
+                            return _.intersection([" Scholarships", "Scholarships"], obj.FeeAssistance.split(',')).length > 0;
+                        } else if (filter[1] === "Employer/college supported discounts") {
+                            return _.intersection([" Employer/College Supported Discount", ], obj.FeeAssistance.split(',')).length > 0;
+                        }
                     }
                 }
             } else {
-                condition = function(obj) {
-                    return obj[filter[0]] === filter[1]
+                condition = {
+                    type: filter[0],
+                    filter: function(obj) {
+                        return obj[filter[0]] === filter[1]
+                    }
                 }
             }
             conditions.push(condition)
