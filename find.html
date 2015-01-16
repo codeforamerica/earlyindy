@@ -331,7 +331,7 @@
     <div class="popup-marker-data" style="height: 250px;max-width:200px;">
         <h4><%= businessname.value %></h4>
         <%= streetaddress.value %><br />
-        <%= city.value %><br />
+        <%= city.value %>,
         <%= zip.value %><br />
         <%= phone.value %><br />
         <% if ( typeof website !== 'undefined' ) { %> 
@@ -349,8 +349,7 @@
                 <dt><%= ages.name %>:</dt>
                 <dd><%= ages.value %></dd>
             <% } %>
-            
-          
+ 
         </dl>
     </div>
   </script>
